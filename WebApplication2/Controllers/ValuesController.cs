@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication2.Controllers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,18 +12,20 @@ namespace WebApplication2
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-
+        // Get all the shiping data
+        // Put in a last value that indicates that it is send from us
         [HttpGet]
         public IEnumerable<String> Get(
-            string custid,
+            string custid, // Identify the sender
             string name,
             int phone,
             string email,
             string country,
             int weight,
-            string content,
             string type,
-            int[] dimension,
+            int width,
+            int height,
+            int depth,
             string fromcity,
             string tocity,
             bool askforprice
@@ -30,13 +33,53 @@ namespace WebApplication2
         {
 
 
-            /*
-            if (false)
-            {
 
-                return new string[];
+            if (askforprice)
+            {
+                if (custid == "TS-ID")
+                {
+                    // Only return our price
+                    // The list of shipping fares for the requested type
+                }
+                else if (custid == "OA_ID")
+                {
+                    // Only return our price
+                    // The list of shipping fares for the requested type
+
+                }
+                else
+                {
+                    // get prices from TS and OA
+                    // return cheapest and fastest price
+                    
+
+                }
             }
-            */
+            else
+            {
+                if (custid == "TS-ID")
+                {
+                    // Calc/get our own price
+                    // Send invoice to system
+                }
+                else if (custid == "OA_ID")
+                {
+                    // Calc/get our own price
+                    // Send invoice to system
+
+                }
+                else
+                {
+                    // get prices from TS and OA
+                    // 
+
+                }
+
+                //bool sendOrderResult = Utilities.sendOrderTo();
+
+
+            }
+
 
 
             string[] result = new string[3];
@@ -55,8 +98,23 @@ namespace WebApplication2
         }
 
 
+        
+        [HttpGet]
+        public void Get(int id, int seconds)
+        {
+            //List<CityConnention> shippingData = Utilities::getShippingData();
 
-        /*
+
+
+
+
+            
+
+            return;
+        }
+
+
+
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -84,6 +142,6 @@ namespace WebApplication2
         {
         }
 
-        */
+        
     }
 }
