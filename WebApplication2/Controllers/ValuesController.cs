@@ -43,8 +43,8 @@ namespace WebApplication2
 
 
             string s0 = "City1,City2,33,600";
-            string s1 = "City1,City2,33,600";
-            string s2 = "City1,City2,33,600";
+            string s1 = "City2,City3,34,10";
+            string s2 = "City1,City3,13,90";
 
 
             result[0] = s0;
