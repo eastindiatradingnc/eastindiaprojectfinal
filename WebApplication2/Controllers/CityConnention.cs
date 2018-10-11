@@ -10,4 +10,7 @@
         public string City2 { get => city2; set => city2 = value; }
         public string TransportType { get => transportType; set => transportType = value; }
     }
+
+
+
 }

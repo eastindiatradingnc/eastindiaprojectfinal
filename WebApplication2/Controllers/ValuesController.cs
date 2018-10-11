@@ -15,7 +15,7 @@ namespace WebApplication2
         // Get all the shiping data
         // Put in a last value that indicates that it is send from us
         [HttpGet]
-        public IEnumerable<String> Get(
+        public List<Route> Get(
             string custid, // Identify the sender
             string name,
             int phone,
@@ -94,11 +94,15 @@ namespace WebApplication2
             result[1] = s1;
             result[2] = s2;
 
-            return result;
+            //return result;
+
+            //return Utilities.GetShippingData();
+
+            return Utilities.GetPricesFromOA();
         }
 
 
-        
+        /*
         [HttpGet]
         public void Get(int id, int seconds)
         {
@@ -123,11 +127,17 @@ namespace WebApplication2
             return "value";
         }
 
+
+        */
+
         // POST api/values
         [HttpPost]
-        public string Post([FromBody]string value)
+        public string Post([FromForm]int customerIdInput, [FromForm]string nameInput)
         {
-            return "posted";
+
+            var sendOrderResult = Utilities.SendOrderToEIT();
+
+            return $"{customerIdInput} - {nameInput}";
         }
 
         // PUT api/values/5
