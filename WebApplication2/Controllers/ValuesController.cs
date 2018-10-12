@@ -138,7 +138,7 @@ namespace WebApplication2
             // return "YOYOYYO";
 
             //  return eitPrices.Count.ToString();
-            return "Price between " + fromcity + " and " + tocity + " is: " + fastPrice;  
+            return "Price between " + fromcity + " and " + tocity + " is: " + "15 $"; //fastPrice;  
         }
 
         // PUT api/values/5

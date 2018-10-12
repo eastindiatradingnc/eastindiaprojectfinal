@@ -111,15 +111,13 @@ namespace WebApplication2.Controllers
 
             foreach (Route element in routes)
             {
-                if (element.From == from || element.From == to)
+                Console.WriteLine(element.ToString());
+                if ((element.From == from || element.From == to) && (element.To == from || element.To == to))
                 {
-                    if (element.To == from || element.To == to)
+                    if (element.Price != 0)
                     {
-                        if (element.Price != 0)
-                        {
-                            myRoute = element;
-                            break;
-                        }
+                        myRoute = element;
+                        break;
                     }
                 }
             }
