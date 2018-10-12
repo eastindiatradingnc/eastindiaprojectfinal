@@ -84,6 +84,7 @@ namespace WebApplication2.Controllers
             using (var client = new HttpClient())
             {
                 var result = client.GetStringAsync(_TSURL + urlSuffix).Result;
+                //var result = client.GetStringAsync(_TSURL).Result;
 
                 return JsonConvert.DeserializeObject<List<Route>>(result);
             }
@@ -95,18 +96,37 @@ namespace WebApplication2.Controllers
 
             using (var client = new HttpClient())
             {
-                var result = client.GetStringAsync(_OAURL + urlSuffix).Result;
-                
+                //var result = client.GetStringAsync(_OAURL + urlSuffix).Result;
+                var result = client.GetStringAsync(_OAURL).Result;
+
                 return JsonConvert.DeserializeObject<List<Route>>(result);
             }
         }
 
-        
-        public static int CalculateFastestPrice(List<Route> routes)
-        {
-            return 0;
-        }
 
+        public static int CalculateFastestPrice(List<Route> routes, string from, string to)
+        {
+
+            Route myRoute = new Route();
+
+            foreach (Route element in routes)
+            {
+                if (element.From == from || element.From == to)
+                {
+                    if (element.To == from || element.To == to)
+                    {
+                        if (element.Price != 0)
+                        {
+                            myRoute = element;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return myRoute.Price;
+
+        }
         public static int CalculateCheapestPrice(List<Route> routes)
         {
             return 0;

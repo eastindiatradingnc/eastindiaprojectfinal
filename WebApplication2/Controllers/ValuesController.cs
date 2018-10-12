@@ -82,15 +82,16 @@ namespace WebApplication2
             [FromForm]bool askforprice
             )
         {
+            List<Route> eitPrices;
 
-            if (askforprice)
+            if (true)
             {
                 // get prices from TS and OA
                 // return cheapest and fastest price
 
                 List<Route> oaPrices = Utilities.GetPricesFromOA("/" + fromcity + "/" + tocity + "/" + type + "/" + weight + "/" + height + "/" + depth + "/" + width + "/" + custid);
                 List<Route> tsPrices = Utilities.GetPricesFromTS("/" + width + "/" + height + "/" + depth + "/" + weight + "/" + type + "/" + type);
-                List<Route> eitPrices = Utilities.GetShippingData(weight, type);
+                eitPrices = Utilities.GetShippingData(weight, type);
 
 
                 foreach (Route element in oaPrices)
@@ -104,8 +105,8 @@ namespace WebApplication2
                 }
 
 
-                int fastestPrice = Utilities.CalculateFastestPrice(eitPrices);
-                int cheapestPrice = Utilities.CalculateCheapestPrice(eitPrices);
+            //    int fastestPrice = Utilities.CalculateFastestPrice(eitPrices);
+            //    int cheapestPrice = Utilities.CalculateCheapestPrice(eitPrices);
 
 
 
@@ -124,6 +125,8 @@ namespace WebApplication2
 
             }
 
+            int fastPrice = Utilities.CalculateFastestPrice(eitPrices, fromcity, tocity);
+
 
             //return Utilities.GetShippingData();
 
@@ -131,8 +134,11 @@ namespace WebApplication2
 
             //var sendOrderResult = Utilities.SendOrderToEIT();
 
-            //return $"{customerIdInput} - {nameInput}";
-            return "YOYOYYO";
+            //return $"{custid} - {name} - {country} - {phone} - {email} - {fromcity} - {tocity} - {type} - {weight} - {width} - {height} - {depth}";
+            // return "YOYOYYO";
+
+            //  return eitPrices.Count.ToString();
+            return "Price between " + fromcity + " and " + tocity + " is: " + fastPrice;  
         }
 
         // PUT api/values/5

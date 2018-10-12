@@ -2,43 +2,107 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 50%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+
+
 <script src="~/lib/jquery/dist/jquery.js"></script>
 
-<script>$(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-    $('#myForm').submit(function (e) {
-        e.preventDefault();
+        $('#myForm').submit(function (e) {
+            e.preventDefault();
 
-        
 
-        var onSuccess = function (result) {
-            $('#resultValue').html(result);
-        };
 
-        $.ajax({
-            type: 'POST',
-            url: '/api/values',
-            data: $(this).serialize(),
-            success: onSuccess
+            var onSuccess = function (result) {
+                $('#resultValue').html(result);
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/values',
+                data: $(this).serialize(),
+                success: onSuccess
+            });
+
+
+
         });
 
-
-
     });
-    
-});
 </script>
 
+<h2>Please enter your delivery information:</h2>
 <div>
     <form action="/api/values" method="post" id="myForm">
         <div class="form-group">
             <label for="customerIdLabel">Customer ID</label>
-            <input type="text" class="form-control" id="customerIdInput" name="customerIdInput" aria-describedby="emailHelp" placeholder="Enter customer ID">
+            <input type="text" class="form-control" id="custid" name="custid" aria-describedby="emailHelp" placeholder="Enter customer ID">
         </div>
         <div class="form-group">
             <label for="nameLabel">Full name</label>
-            <input type="text" class="form-control" id="nameInput" name="nameInput" aria-describedby="emailHelp" placeholder="Enter name">
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter name">
         </div>
+        <div class="form-group">
+            <label for="fromLabel">Sending package from</label>
+            <input type="text" class="form-control" id="fromcity" name="fromcity" aria-describedby="emailHelp" placeholder="Enter city of departure">
+        </div>
+        <div class="form-group">
+            <label for="toLabel">Sending package to</label>
+            <input type="text" class="form-control" id="tocity" name="tocity" aria-describedby="emailHelp" placeholder="Enter destination city">
+        </div>
+        <div class="form-group">
+            <label for="phoneLabel">Phone number</label>
+            <input type="number" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="Enter phone number">
+        </div>
+        <div class="form-group">
+            <label for="emailLabel">Email address</label>
+            <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email address">
+        </div>
+        <div class="form-group">
+            <label for="citizenshipLabel">Citizenship</label>
+            <input type="text" class="form-control" id="country" name="country" aria-describedby="emailHelp" placeholder="Enter citizenship">
+        </div>
+        <div class="form-group">
+            <label for="weightLabel">Weight</label>
+            <input type="number" class="form-control" id="weight" name="weight" aria-describedby="emailHelp" placeholder="Enter weight">
+        </div>
+        <div class="form-group">
+            <label for="fromLabel">Type</label>
+            <input type="text" class="form-control" id="type" name="type" aria-describedby="emailHelp" placeholder="Enter type of package">
+        </div>
+        <div class="form-group">
+            <label for="widthLabel">Width</label>
+            <input type="number" class="form-control" id="width" name="width" aria-describedby="emailHelp" placeholder="Enter width of package">
+        </div>
+        <div class="form-group">
+            <label for="heightLabel">Height</label>
+            <input type="number" class="form-control" id="height" name="height" aria-describedby="emailHelp" placeholder="Enter height of package">
+        </div>
+        <div class="form-group">
+            <label for="depthLabel">Depth</label>
+            <input type="number" class="form-control" id="depth" name="depth" aria-describedby="emailHelp" placeholder="Enter depth of package">
+        </div>
+
+
         <button type="submit" id="calculatePriceButton" class="btn btn-primary">Calculate price</button>
     </form>
 
@@ -46,3 +110,30 @@
 
     </div>
 </div>
+
+<h4>Cheapest solution is listed below</h4>
+
+<div class="row">
+    <div class="column">
+        <button id="cheapestRouteButton" style="width:50%">Choose cheapest route</button>
+    </div>
+    <div class="column">
+        <p id="textToRight1" style="width:50%">Price:</p>
+        <p id="textToRight2" style="width:50%">Time of delivery:</p>
+
+    </div>
+</div>
+
+<h4>Fastest solution is listed below</h4>
+
+<div class="row">
+    <div class="column">
+        <button id="fastestRouteButton" style="width:50%">Choose fastest route</button>
+    </div>
+    <div class="column">
+        <p id="textToRight3" style="width:50%">Price:</p>
+        <p id="textToRight4" style="width:50%">Time of delivery:</p>
+
+    </div>
+</div>
+
