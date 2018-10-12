@@ -45,7 +45,7 @@ namespace WebApplication2.Controllers
                         var route = new Route();
                         route.From = (string)row["From"];
                         route.To = (string)row["To"];
-                        route.Time = (int)row["Routing_Time"];
+                        route.Time = (int)row["Time"];
                         route.Price = (int)row["Price"];
 
 

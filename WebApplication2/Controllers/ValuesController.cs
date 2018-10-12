@@ -60,18 +60,79 @@ namespace WebApplication2
         {
             return "value";
         }
-
+        public string Post([FromForm]int customerIdInput, [FromForm]string nameInput)
 
         */
 
         // POST api/values
         [HttpPost]
-        public string Post([FromForm]int customerIdInput, [FromForm]string nameInput)
+        public string Post(
+            [FromForm]string custid, // Identify the sender
+            [FromForm]string name,
+            [FromForm]int phone,
+            [FromForm]string email,
+            [FromForm]string country,
+            [FromForm]int weight,
+            [FromForm]string type,
+            [FromForm]int width,
+            [FromForm]int height,
+            [FromForm]int depth,
+            [FromForm]string fromcity,
+            [FromForm]string tocity,
+            [FromForm]bool askforprice
+            )
         {
 
-            var sendOrderResult = Utilities.SendOrderToEIT();
+            if (askforprice)
+            {
+                // get prices from TS and OA
+                // return cheapest and fastest price
 
-            return $"{customerIdInput} - {nameInput}";
+                List<Route> oaPrices = Utilities.GetPricesFromOA("/" + fromcity + "/" + tocity + "/" + type + "/" + weight + "/" + height + "/" + depth + "/" + width + "/" + custid);
+                List<Route> tsPrices = Utilities.GetPricesFromTS("/" + width + "/" + height + "/" + depth + "/" + weight + "/" + type + "/" + type);
+                List<Route> eitPrices = Utilities.GetShippingData(weight, type);
+
+
+                foreach (Route element in oaPrices)
+                {
+                    eitPrices.Add(element);
+                }
+
+                foreach (Route element in tsPrices)
+                {
+                    eitPrices.Add(element);
+                }
+
+
+                int fastestPrice = Utilities.CalculateFastestPrice(eitPrices);
+                int cheapestPrice = Utilities.CalculateCheapestPrice(eitPrices);
+
+
+
+            }
+            else
+            {
+
+
+                // Calc/get our own price
+                // Send invoice to system
+                // get prices from TS and OA
+                // 
+
+                //bool sendOrderResult = Utilities.sendOrderTo();
+
+
+            }
+
+
+            //return Utilities.GetShippingData();
+
+            //return Utilities.GetPricesFromOA();
+
+            //var sendOrderResult = Utilities.SendOrderToEIT();
+
+            //return $"{customerIdInput} - {nameInput}";
+            return "YOYOYYO";
         }
 
         // PUT api/values/5
