@@ -36,65 +36,45 @@ namespace WebApplication2
 
             if (askforprice)
             {
-                if (custid == "TS-ID")
-                {
-                    // Only return our price
-                    // The list of shipping fares for the requested type
-                }
-                else if (custid == "OA_ID")
-                {
-                    // Only return our price
-                    // The list of shipping fares for the requested type
+                // get prices from TS and OA
+                // return cheapest and fastest price
 
-                }
-                else
-                {
-                    // get prices from TS and OA
-                    // return cheapest and fastest price
-                    
+                List<Route> oaPrices = Utilities.GetPricesFromOA("/" + fromcity + "/" + tocity + "/" + type + "/" + weight + "/" + height + "/" + depth + "/" + width + "/" + custid);
+                List<Route> tsPrices = Utilities.GetPricesFromTS("/" + width + "/" + height + "/" + depth + "/" + weight + "/" + type + "/" + type);
+                List<Route> eitPrices = Utilities.GetShippingData();
 
+                
+                foreach (Route element in oaPrices)
+                {
+                    eitPrices.Add(element);
                 }
+
+                foreach (Route element in tsPrices)
+                {
+                    eitPrices.Add(element);
+                }
+
+
+                int fastestPrice = Utilities.CalculateFastestPrice(eitPrices);
+                int cheapestPrice = Utilities.CalculateCheapestPrice(eitPrices);
+
+
+
             }
             else
             {
-                if (custid == "TS-ID")
-                {
-                    // Calc/get our own price
-                    // Send invoice to system
-                }
-                else if (custid == "OA_ID")
-                {
-                    // Calc/get our own price
-                    // Send invoice to system
+                
 
-                }
-                else
-                {
-                    // get prices from TS and OA
-                    // 
-
-                }
+                // Calc/get our own price
+                // Send invoice to system
+                // get prices from TS and OA
+                // 
 
                 //bool sendOrderResult = Utilities.sendOrderTo();
 
 
             }
-
-
-
-            string[] result = new string[3];
-
-
-            string s0 = "City1,City2,33,600";
-            string s1 = "City2,City3,34,10";
-            string s2 = "City1,City3,13,90";
-
-
-            result[0] = s0;
-            result[1] = s1;
-            result[2] = s2;
-
-            //return result;
+            
 
             //return Utilities.GetShippingData();
 
